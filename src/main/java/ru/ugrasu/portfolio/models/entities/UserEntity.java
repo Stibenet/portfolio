@@ -56,7 +56,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "infoUser", nullable = false, length = 255)
+    @Column(name = "info_user", nullable = false, length = 255)
     public String getInfoUser() {
         return infoUser;
     }
