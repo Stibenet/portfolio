@@ -15,6 +15,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 /**
  * Created by Марсель on 14.10.2017.
  */
+//hello
 @RestController
 @RequestMapping(value = "knowledge")
 public class KnowledgeController {
