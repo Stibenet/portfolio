@@ -36,14 +36,14 @@ public class KnowledgeController {
         return knowledgeService.getAllKnowledge();
     }
 
-    @RequestMapping(value = "/createKnowledge/{id}/{name}", method = RequestMethod.GET)
-    public KnowledgeEntity createKnows(@PathVariable("id") Integer id, @PathVariable("name") String name){
-        return knowledgeService.createKnows(id, name);
+    @RequestMapping(value = "/createKnowledge/{id}/{name}", method = RequestMethod.POST)
+    public KnowledgeEntity createKnows(@RequestBody KnowledgeEntity knowledgeEntity){
+        return knowledgeService.createKnows(knowledgeEntity);
     }
 
-    @RequestMapping(value = "/updateKnowledge/{id}/{name}", method = RequestMethod.GET)
-    public KnowledgeEntity updateKnows(@PathVariable("id") Integer id, @PathVariable("name") String name){
-        return knowledgeService.updateKnows(id, name);
+    @RequestMapping(value = "/updateKnowledge/{id}/{name}", method = RequestMethod.POST)
+    public KnowledgeEntity updateKnows(@RequestBody KnowledgeEntity knowledgeEntity){
+        return knowledgeService.updateKnows(knowledgeEntity);
     }
 
     @RequestMapping(value = "/deleteKnowledge/{idKnows}", method = RequestMethod.GET)

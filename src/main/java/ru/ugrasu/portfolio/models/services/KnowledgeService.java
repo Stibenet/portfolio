@@ -37,19 +37,12 @@ public class KnowledgeService {
         return knows;
     }
 
-    public KnowledgeEntity createKnows(Integer id, String name){
-        KnowledgeEntity knows = new KnowledgeEntity();
-        knows.setIdKnowledge(id);
-        knows.setNameKnowledge(name);
-
-        return knowledgeRepository.save(knows);
+    public KnowledgeEntity createKnows(KnowledgeEntity knowledgeEntity){
+        return knowledgeRepository.save(knowledgeEntity);
     }
 
-    public KnowledgeEntity updateKnows(Integer id, String name){
-        KnowledgeEntity knows = new KnowledgeEntity();
-        knows.setIdKnowledge(id);
-        knows.setNameKnowledge(name);
-        return knowledgeRepository.save(knows);
+    public KnowledgeEntity updateKnows(KnowledgeEntity knowledgeEntity){
+        return knowledgeRepository.save(knowledgeEntity);
     }
 
     public void deleteKnows(Integer idKnowledge){
