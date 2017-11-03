@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+<script>
+    $( document ).ready(function() {
+
+        $('#sendRequest').click(function(){
+            var id = $('#userId').val();
+
+            $.ajax({
+                url:'http://localhost:8080/work/findById/'+id,
+                type:'GET',
+                success: function(data){
+                    console.log(data);
+                    $('#teacherName').html(data.name);
+                },
+                error: function(xhr,textStatus){
+                    if(xhr.status=="500")
+                        $('#teacherName').html("<H1 style='color:red'>warn</H1>");
+                    else $('#teacherName').html("<H1 style='color:red'>warn</H1>");
+                }
+
+            })
+        })
+
+    });
+    console.log( );
+</script>
+<input type="text" id="userId"/>
+<input type="button" value="button" id = "sendRequest"/>
+
+<div id = "teacherName"></div>
+</body>
+</html>
