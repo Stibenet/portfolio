@@ -1,6 +1,7 @@
 package ru.ugrasu.portfolio.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
 import ru.ugrasu.portfolio.exception.ResourceNotFoundException;
@@ -31,17 +32,28 @@ public class KnowledgeController {
         }
     }
 
+    @RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
+    public KnowledgeEntity findById(@PathVariable("id") Integer id){
+        try {
+            return knowledgeService.findById(id);
+        }catch (DbEntityNotFoundException e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+    }
+
     @RequestMapping(value = "/allKnowledge", method = RequestMethod.GET)
     public List<KnowledgeEntity> getAllBikes(){
         return knowledgeService.getAllKnowledge();
     }
 
-    @RequestMapping(value = "/createKnowledge/{id}/{name}", method = RequestMethod.POST)
+    @RequestMapping(value = "/createKnowledge",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            method = RequestMethod.POST)
     public KnowledgeEntity createKnows(@RequestBody KnowledgeEntity knowledgeEntity){
         return knowledgeService.createKnows(knowledgeEntity);
     }
 
-    @RequestMapping(value = "/updateKnowledge/{id}/{name}", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateKnowledge", method = RequestMethod.POST)
     public KnowledgeEntity updateKnows(@RequestBody KnowledgeEntity knowledgeEntity){
         return knowledgeService.updateKnows(knowledgeEntity);
     }

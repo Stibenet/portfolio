@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
 import ru.ugrasu.portfolio.models.entities.KnowledgeEntity;
-import ru.ugrasu.portfolio.models.entities.MyWorkEntity;
-import ru.ugrasu.portfolio.models.entities.UserEntity;
 import ru.ugrasu.portfolio.models.repositories.KnowledgeRepository;
-import ru.ugrasu.portfolio.models.repositories.MyWorkRepository;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -47,5 +44,14 @@ public class KnowledgeService {
 
     public void deleteKnows(Integer idKnowledge){
         knowledgeRepository.delete(idKnowledge);
+    }
+
+    public KnowledgeEntity findById(int id) throws DbEntityNotFoundException {
+        KnowledgeEntity knowledgeEntity;
+        knowledgeEntity = knowledgeRepository.findOne(id);
+        if (knowledgeEntity == null){
+            throw new DbEntityNotFoundException("Work with id = " + id + "not found");
+        }
+        return knowledgeEntity;
     }
 }

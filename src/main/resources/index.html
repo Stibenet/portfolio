@@ -2,37 +2,94 @@
 <html lang="en">
 <head>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <meta charset="utf-8">
 </head>
 
 <body>
 <script>
     $( document ).ready(function() {
-
-        $('#sendRequest').click(function(){
-            var id = $('#userId').val();
+        $('#send_request').click(function(){
+            var id = $('#user_id').val();
 
             $.ajax({
-                url:'http://localhost:8080/work/findById/'+id,
+                url:'http://localhost:8080/knowledge/findById/'+id,
                 type:'GET',
                 success: function(data){
                     console.log(data);
-                    $('#teacherName').html(data.name);
+                    $('.result_request').html(data);
                 },
                 error: function(xhr,textStatus){
                     if(xhr.status=="500")
-                        $('#teacherName').html("<H1 style='color:red'>warn</H1>");
-                    else $('#teacherName').html("<H1 style='color:red'>warn</H1>");
+                        $('#result_request').html("<H1 style='color:red'>Error</H1>");
+                    else $('#result_request').html("<H1 style='color:red'>Not found</H1>");
                 }
 
             })
         })
+    });
+    $( document ).ready(function() {
+        $('#knowledge_save').click(function(){
+            var id = $('#knowledge_id').val();
+            var name = $('#knowledge_name').val();
 
+            $.ajax({
+                url:'http://localhost:8080/knowledge/createKnowledge',
+                method:'POST',
+                data: {
+                    id_knowledge: id,
+                    name_knowledge: name,
+                }
+                /*success: function(data){
+                    console.log(data);
+                    $('#result_save').html(data);
+                },
+                error: function(xhr,textStatus){
+                    if(xhr.status=="500")
+                        $('#result_save').html("<H1 style='color:red'>warn</H1>");
+                    else $('#result_save').html("<H1 style='color:red'>warn</H1>");
+                }*/
+            })
+        })
+    });
+    $( document ).ready(function() {
+        $('#send_delete').click(function(){
+            var id = $('#id_knowledge_delete').val();
+
+            $.ajax({
+                url:'http://localhost:8080/knowledge/deleteKnowledge/'+id,
+                type:'GET',
+                success: function(data){
+                    console.log(data);
+                    $('#result_delete').html(data.name);
+                },
+//                error: function(xhr,textStatus){
+//                    if(xhr.status=="500")
+//                        $('#teacherName').html("<H1 style='color:red'>warn</H1>");
+//                    else $('#teacherName').html("<H1 style='color:red'>warn</H1>");
+//                }
+
+            })
+        })
     });
     console.log( );
 </script>
-<input type="text" id="userId"/>
-<input type="button" value="button" id = "sendRequest"/>
-
-<div id = "teacherName"></div>
+Find knowledge by id.
+<br>
+<input type="text" id="user_id"/>
+<input type="button" value="Send" id = "send_request"/>
+<div id = "result_request"></div>
+<br>
+Save new knowledge.
+<br>
+<input type="text" id="knowledge_id"/>
+<input type="text" id="knowledge_name"/>
+<input type="button" value="Save" id = "knowledge_save"/>
+<div id = "result_save"></div>
+<br>
+Delete knowledge by id.
+<br>
+<input type="text" id="id_knowledge_delete"/>
+<input type="button" value="Delete" id = "send_delete"/>
+<div id = "result_delete"></div>
 </body>
 </html>
