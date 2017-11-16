@@ -25,11 +25,14 @@ public class KnowledgeService {
         return knowledgeRepository.findByNameKnowledgeContaining(nameKnow);
     }
 
-    public List<KnowledgeEntity> getAllKnowledge(){
+    public List<KnowledgeEntity> getAllKnowledge() throws DbEntityNotFoundException {
         List<KnowledgeEntity> knows = new ArrayList<KnowledgeEntity>();
         Iterator<KnowledgeEntity> iterator = knowledgeRepository.findAll().iterator();
         while (iterator.hasNext()){
             knows.add(iterator.next());
+        }
+        if (knows == null){
+            throw new DbEntityNotFoundException("Elements now found");
         }
         return knows;
     }
@@ -42,7 +45,10 @@ public class KnowledgeService {
         return knowledgeRepository.save(knowledgeEntity);
     }
 
-    public void deleteKnows(Integer idKnowledge){
+    public void deleteKnows(Integer idKnowledge) throws DbEntityNotFoundException {
+        if (idKnowledge == null){
+            throw  new DbEntityNotFoundException("id = " + idKnowledge + "not found");
+        }
         knowledgeRepository.delete(idKnowledge);
     }
 

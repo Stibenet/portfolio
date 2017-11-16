@@ -2,16 +2,16 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Марсель Фаткуллин</title>
+	<title>Связь со мной</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="scripts/article.js"></script>
 	<script type="text/javascript" src="scripts/banner.js"></script>
 </head>
 <body>
+
 	<header>
 		<div id="logo">
-			<a href="/" title="Перейти на главную">
+			<a href="index.html" title="Перейти на главную">
 				<span>М</span>арсель
 				<span>Ф</span>аткуллин
 			</a>
@@ -21,8 +21,8 @@
 		<a href="about.html">
 			<div style="margin-right: 5%">Обо мне</div>
 		</a>
-		<a href="contact.html">
-			<div>Связь со мной</div>
+		<a href="/feedback.html">
+			<div>Обратная связь</div>
 		</a>
 		</div>
 
@@ -35,46 +35,33 @@
 
 	<div id="wrapper">
 		<div id="leftCol">
-
-							<h2>Мои работы</h2>
-							<br>
-			<div id="bigArticle">
-				<img src="img/articles/1.png" alt="Статья 1" title="Статья 1">
-				<h2 id="name1"></h2>
-				<input type="button" value="Далее" id = "moreArticle1"/>
-			</div>
-			<div class="clear">
-				<br>
-			</div>
-
-			<div class="article">
-				<img src="img/articles/2.png" alt="Статья 2" title="Статья 2">
-				<h2 id="name2"></h2>
-				<input type="button" value="Далее" id = "moreArticle2"/>
-			</div>
-
-			<div class="article">
-				<img src="img/articles/3.png" alt="Статья 3" title="Статья 3">
-				<h2 id="name3"></h2>
-				<input type="button" value="Далее" id = "moreArticle3"/>
-			</div>
-			<div class="clear">
-				<br>
-			</div>
-			<div class="article">
-				<img src="img/articles/4.png" alt="Статья 4" title="Статья 4">
-				<h2 id="name4"></h2>
-				<input type="button" value="Далее" id = "moreArticle4"/>
-			</div>
-			<div class="article">
-				<img src="img/articles/5.png" alt="Статья 5" title="Статья 5">
-				<h2 id="name5"></h2>
-				<input type="button" value="Далее" id = "moreArticle5"/>
+			<div id="about_us">
+				<h2>Заполните форму</h2>
+		<form method="post" action="handler.php">
+		   <table width="100%" cellspacing="0" cellpadding="4">
+			    <tr> 
+			     <td align="right" width="100">ФИО </td>
+			     <td><input type="text" name="nickname" maxlength="50" size="20" style="margin: 1%"></td>
+			    </tr>
+			    <tr> 
+			     <td align="right">E-mail </td>
+			     <td><input type="text" name="email" maxlength="50" size="20" style = "margin: 1%"></td>
+			    </tr>
+			    <tr> 
+			     <td align="right" valign="top" margin-top: 20%>Комментарий</td>
+			     <td><textarea name="text" cols="35" rows="10" style = "margin: 1%"></textarea></td>
+			    </tr>
+			    <tr> 
+			     <td></td>
+			     <td><input type="submit" value="Отправить"></td>
+			    </tr>
+		   </table>
+		</form>
+                            
 			</div>
 		</div>
 
 		<div id="rightCol">
-
 			<div id="banner">
 				<img src="img/banner_2.png" alt="Java" title="Java">
 				<h3 id="nameBanner2"></h3>
@@ -92,6 +79,7 @@
 				<h3 id="nameBanner4"></h3>
 			</div>
 		</div>
+		</div>
 
 	</div>
 
@@ -104,6 +92,7 @@
 		<div id="rights">
 			Все права защищены &copy; <?=date ('Y')?>
 		</div>
+
 	</footer>
 
 </body>

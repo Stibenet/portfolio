@@ -4,6 +4,9 @@
 	<meta charset="utf-8">
 	<title>Обо мне</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="scripts/banner.js"></script>
+	<script type="text/javascript" src="scripts/about.js"></script>
 </head>
 <body>
 
@@ -16,11 +19,8 @@
 		</div>
 
 		<div id="menuHead">
-		<a href="about.php">
-			<div style="margin-right: 5%">Обо мне</div>
-		</a>
-		<a href="/feedback.html">
-			<div>Обратная связь</div>
+		<a href="contact.html">
+			<div>Связь со мной</div>
 		</a>
 		</div>
 
@@ -35,23 +35,30 @@
 		<div id="leftCol">
 			<div id="about_us">
 							<h2>Информация обо мне</h2>
-			Студент 4 курса Югорского государственного университета.
+			<p id="description" style="font-size: 1.7em"></p>
+			<br>
+			<input type="button" value="Далее" id = "more"/>
 		</div>
 		</div>
 
 		<div id="rightCol">
 			<div id="banner">
-				<img src="img/banner_1.png" alt="Баннер 1" title="Баннер 1">
+				<img src="img/banner_2.png" alt="Java" title="Java">
+				<h3 id="nameBanner2"></h3>
 			</div>
 			<div id="banner">
-				<img src="img/banner_2.png" alt="Баннер 2" title="Баннер 2">
+				<img src="img/banner_3.png" alt="JS" title="JS">
+				<h3 id="nameBanner3"></h3>
 			</div>
 			<div id="banner">
-				<img src="img/banner_3.png" alt="Баннер 3" title="Баннер 3">
-			</div>
+			<img src="img/banner_1.png" alt="C#" title="C#">
+			<h3 id="nameBanner1"></h3>
+		</div>
 			<div id="banner">
-				<img src="img/banner_4.png" alt="Баннер 4" title="Баннер 4">
+				<img src="img/banner_4.png" alt="HTML&CSS" title="HTML&CSS">
+				<h3 id="nameBanner4"></h3>
 			</div>
+		</div>
 		</div>
 
 	</div>

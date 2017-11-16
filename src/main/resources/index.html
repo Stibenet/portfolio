@@ -9,6 +9,7 @@
 <script>
     $( document ).ready(function() {
         $('#send_request').click(function(){
+            $('#result_request').html(" ");
             var id = $('#user_id').val();
 
             $.ajax({
@@ -16,7 +17,7 @@
                 type:'GET',
                 success: function(data){
                     console.log(data);
-                    $('.result_request').html(data);
+                    $('#result_request').html("ID = " + data.idKnowledge + " " + "Name = " + data.nameKnowledge);
                 },
                 error: function(xhr,textStatus){
                     if(xhr.status=="500")
@@ -29,21 +30,27 @@
     });
     $( document ).ready(function() {
         $('#knowledge_save').click(function(){
-            var id = $('#knowledge_id').val();
-            var name = $('#knowledge_name').val();
+            var data = $('#save').val();
+            console.log(data);
+//            console.log(data);
+  //         var id = $('#knowledge_id').val();
+ //          var name = $('#knowledge_name').val();
+
 
             $.ajax({
                 url:'http://localhost:8080/knowledge/createKnowledge',
                 method:'POST',
-                data: {
-                    id_knowledge: id,
-                    name_knowledge: name,
-                }
-                /*success: function(data){
+                datatype:'json',
+//                data: data,
+ //               data: {
+   //                 idKnowledge: 'id',
+     //               nameKnowledge: 'name'
+       //         },
+                success: function(data){
                     console.log(data);
-                    $('#result_save').html(data);
+                    $('#result_save').html(data.idKnowledge);
                 },
-                error: function(xhr,textStatus){
+                /*error: function(xhr,textStatus){
                     if(xhr.status=="500")
                         $('#result_save').html("<H1 style='color:red'>warn</H1>");
                     else $('#result_save').html("<H1 style='color:red'>warn</H1>");
@@ -59,14 +66,13 @@
                 url:'http://localhost:8080/knowledge/deleteKnowledge/'+id,
                 type:'GET',
                 success: function(data){
-                    console.log(data);
-                    $('#result_delete').html(data.name);
+                    $('#result_delete').html("Object deleting");
                 },
-//                error: function(xhr,textStatus){
-//                    if(xhr.status=="500")
-//                        $('#teacherName').html("<H1 style='color:red'>warn</H1>");
-//                    else $('#teacherName').html("<H1 style='color:red'>warn</H1>");
-//                }
+                error: function(xhr,textStatus){
+                    if(xhr.status=="500")
+                        $('#result_delete').html("<H1 style='color:red'>Error</H1>");
+                    else $('#result_delete').html("<H1 style='color:red'>Error</H1>");
+                }
 
             })
         })
@@ -75,20 +81,25 @@
 </script>
 Find knowledge by id.
 <br>
-<input type="text" id="user_id"/>
+ID
+<input type="number" id="user_id"/>
 <input type="button" value="Send" id = "send_request"/>
 <div id = "result_request"></div>
 <br>
 Save new knowledge.
 <br>
-<input type="text" id="knowledge_id"/>
-<input type="text" id="knowledge_name"/>
+<form method="post" id="save">
+ID
+<input type="number" id="knowledge_id"/>
+Name
+<input type="text" id="knowledge_name"/></form>
 <input type="button" value="Save" id = "knowledge_save"/>
 <div id = "result_save"></div>
 <br>
 Delete knowledge by id.
 <br>
-<input type="text" id="id_knowledge_delete"/>
+ID
+<input type="number" id="id_knowledge_delete"/>
 <input type="button" value="Delete" id = "send_delete"/>
 <div id = "result_delete"></div>
 </body>

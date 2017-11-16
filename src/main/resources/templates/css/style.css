@@ -139,6 +139,7 @@ header #regAuth div:hover{
 /* for small article */
 #wrapper #leftCol .article{
 	width: 40%;
+	height: 30%;
 	margin-left: 5%;
 	background-color: #f6f6f6;
 	padding: 1%;
@@ -170,6 +171,10 @@ header #regAuth div:hover{
 	float: left;
 	margin-bottom: 20px;
 }
+#wrapper #rightCol .banner h3{
+ 	text-align: right;
+ 	margin-bottom: 3%;
+}
 
 /* Footer */
 footer{
@@ -195,4 +200,16 @@ footer #social img{
 	height: 30px;
 	float: left;
 	margin-right: 10px;
+}
+
+/******* file contacting********/
+#wrapper #leftCol .personal_information{
+    width: 78%;
+	margin-left: 10%;
+	padding: 1%;
+    float: left;
+    border-collapse: collapse;
+}
+#wrapper #leftCol #send{
+text-align: center;
 }

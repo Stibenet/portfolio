@@ -16,7 +16,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 /**
  * Created by Марсель on 14.10.2017.
  */
-//hello
 @RestController
 @RequestMapping(value = "knowledge")
 public class KnowledgeController {
@@ -43,12 +42,14 @@ public class KnowledgeController {
 
     @RequestMapping(value = "/allKnowledge", method = RequestMethod.GET)
     public List<KnowledgeEntity> getAllBikes(){
-        return knowledgeService.getAllKnowledge();
+        try {
+            return knowledgeService.getAllKnowledge();
+        }catch (DbEntityNotFoundException e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
     }
 
-    @RequestMapping(value = "/createKnowledge",
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            method = RequestMethod.POST)
+    @RequestMapping(value = "/createKnowledge", method = RequestMethod.POST)
     public KnowledgeEntity createKnows(@RequestBody KnowledgeEntity knowledgeEntity){
         return knowledgeService.createKnows(knowledgeEntity);
     }
@@ -60,6 +61,10 @@ public class KnowledgeController {
 
     @RequestMapping(value = "/deleteKnowledge/{idKnows}", method = RequestMethod.GET)
     public void deleteKnows(@PathVariable("idKnows") Integer idKnows){
-        knowledgeService.deleteKnows(idKnows);
+        try {
+            knowledgeService.deleteKnows(idKnows);
+        }catch (DbEntityNotFoundException e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
     }
 }

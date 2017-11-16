@@ -12,6 +12,31 @@ public class WorkplaceEntity {
     private int idWorkplace;
     private String name;
 
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkplaceEntity that = (WorkplaceEntity) o;
+        return idWorkplace == that.idWorkplace &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(place, that.place);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idWorkplace, name, place);
+    }
+
+    private String place;
+
     @Id
     @Column(name = "id_workplace", nullable = false)
     public int getIdWorkplace() {
@@ -32,17 +57,4 @@ public class WorkplaceEntity {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WorkplaceEntity that = (WorkplaceEntity) o;
-        return idWorkplace == that.idWorkplace &&
-                Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idWorkplace, name);
-    }
 }

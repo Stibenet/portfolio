@@ -16,7 +16,4 @@ import java.util.List;
 public interface KnowledgeRepository extends CrudRepository<KnowledgeEntity, Integer> {
     @Query("select p from KnowledgeEntity p where p.nameKnowledge like concat(:name,'%')")
     List<KnowledgeEntity> findByNameKnowledgeContaining(@Param("name") String name);
-
-
-
 }

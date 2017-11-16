@@ -23,6 +23,31 @@ public class KnowledgeEntity {
 
     private String nameKnowledge;
 
+    public String getPeriodStudy() {
+        return periodStudy;
+    }
+
+    public void setPeriodStudy(String periodStudy) {
+        this.periodStudy = periodStudy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        KnowledgeEntity that = (KnowledgeEntity) o;
+        return idKnowledge == that.idKnowledge &&
+                Objects.equals(nameKnowledge, that.nameKnowledge) &&
+                Objects.equals(periodStudy, that.periodStudy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idKnowledge, nameKnowledge, periodStudy);
+    }
+
+    private String periodStudy;
+
     @javax.persistence.Basic
     @javax.persistence.Column(name = "name_knowledge", nullable = false, length = 255)
     public String getNameKnowledge() {
@@ -33,17 +58,4 @@ public class KnowledgeEntity {
         this.nameKnowledge = nameKnowledge;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        KnowledgeEntity that = (KnowledgeEntity) o;
-        return idKnowledge == that.idKnowledge &&
-                Objects.equals(nameKnowledge, that.nameKnowledge);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idKnowledge, nameKnowledge);
-    }
 }
