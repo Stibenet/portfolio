@@ -1,16 +1,17 @@
 package ru.ugrasu.portfolio.models.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
 import ru.ugrasu.portfolio.models.entities.AboutMeEntity;
-import ru.ugrasu.portfolio.models.entities.KnowledgeEntity;
 import ru.ugrasu.portfolio.models.repositories.AboutRepository;
+
+import java.util.List;
 
 /**
  * Created by Марсель on 16.11.2017.
  */
-@Service
+@Component
 public class AboutService {
     @Autowired
     AboutRepository aboutRepository;
@@ -22,5 +23,9 @@ public class AboutService {
             throw new DbEntityNotFoundException("About with id = " + id + "not found");
         }
         return aboutMeEntity;
+    }
+
+    public List<AboutMeEntity> getAll(){
+        return (List<AboutMeEntity>) aboutRepository.findAll();
     }
 }

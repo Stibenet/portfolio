@@ -11,6 +11,8 @@ import ru.ugrasu.portfolio.models.entities.AboutMeEntity;
 import ru.ugrasu.portfolio.models.entities.KnowledgeEntity;
 import ru.ugrasu.portfolio.models.services.AboutService;
 
+import java.util.List;
+
 /**
  * Created by Марсель on 16.11.2017.
  */
@@ -27,5 +29,15 @@ public class AboutControllers {
         }catch (DbEntityNotFoundException e){
             throw new ResourceNotFoundException(e.getMessage());
         }
+    }
+
+
+    @RequestMapping(value = "/allAbout", method = RequestMethod.GET)
+    public List<AboutMeEntity> getAll(){
+//        try {
+            return aboutService.getAll();
+//        }catch (DbEntityNotFoundException e){
+//            throw new ResourceNotFoundException(e.getMessage());
+//        }
     }
 }
