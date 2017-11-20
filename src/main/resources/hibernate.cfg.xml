@@ -12,6 +12,8 @@
     <mapping class="ru.ugrasu.portfolio.models.entities.WorkplaceEntity"/>
     <mapping class="ru.ugrasu.portfolio.models.entities.UserEntity"/>
       <mapping class="ru.ugrasu.portfolio.models.entities.AboutMeEntity"/>
+      <mapping class="ru.ugrasu.portfolio.models.entities.ExperienceWorkEntity"/>
+      <mapping class="ru.ugrasu.portfolio.models.entities.WhatDoEntity"/>
       <!-- DB schema will be updated if needed -->    <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>

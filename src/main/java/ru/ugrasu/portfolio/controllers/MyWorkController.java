@@ -33,9 +33,4 @@ public class MyWorkController {
             throw new ResourceNotFoundException(e.getMessage());
         }
     }
-
-    @RequestMapping(value = "/findByNameWork/{nameWork}", produces = APPLICATION_JSON_UTF8_VALUE, method = GET)
-    public List<MyWorkEntity> findByNameWork(@PathVariable("nameWork") String nameWork) {
-            return myWorkService.findByNameWork(nameWork);
-    }
 }

@@ -6,8 +6,6 @@ import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
 import ru.ugrasu.portfolio.models.entities.KnowledgeEntity;
 import ru.ugrasu.portfolio.models.repositories.KnowledgeRepository;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,30 +16,17 @@ public class KnowledgeService {
     @Autowired
     private KnowledgeRepository knowledgeRepository;
 
-    public List<KnowledgeEntity> findByNameKnowledge(String nameKnow) throws DbEntityNotFoundException {
-        if (nameKnow == null){
-            throw new DbEntityNotFoundException("Name = " + nameKnow + "not found");
+    public KnowledgeEntity createKnows(KnowledgeEntity knowledgeEntity) throws DbEntityNotFoundException {
+        if (knowledgeEntity == null){
+            throw new DbEntityNotFoundException("Knowledge is empty");
         }
-        return knowledgeRepository.findByNameKnowledgeContaining(nameKnow);
-    }
-
-    public List<KnowledgeEntity> getAllKnowledge() throws DbEntityNotFoundException {
-        List<KnowledgeEntity> knows = new ArrayList<KnowledgeEntity>();
-        Iterator<KnowledgeEntity> iterator = knowledgeRepository.findAll().iterator();
-        while (iterator.hasNext()){
-            knows.add(iterator.next());
-        }
-        if (knows == null){
-            throw new DbEntityNotFoundException("Elements now found");
-        }
-        return knows;
-    }
-
-    public KnowledgeEntity createKnows(KnowledgeEntity knowledgeEntity){
         return knowledgeRepository.save(knowledgeEntity);
     }
 
-    public KnowledgeEntity updateKnows(KnowledgeEntity knowledgeEntity){
+    public KnowledgeEntity updateKnows(KnowledgeEntity knowledgeEntity) throws DbEntityNotFoundException {
+        if (knowledgeEntity == null){
+            throw new DbEntityNotFoundException("Knowledge is empty");
+        }
         return knowledgeRepository.save(knowledgeEntity);
     }
 
@@ -56,7 +41,7 @@ public class KnowledgeService {
         KnowledgeEntity knowledgeEntity;
         knowledgeEntity = knowledgeRepository.findOne(id);
         if (knowledgeEntity == null){
-            throw new DbEntityNotFoundException("Work with id = " + id + "not found");
+            throw new DbEntityNotFoundException("Knowledge with id = " + id + "not found");
         }
         return knowledgeEntity;
     }

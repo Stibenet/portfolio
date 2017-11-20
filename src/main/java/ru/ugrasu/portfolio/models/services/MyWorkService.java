@@ -25,8 +25,4 @@ public class MyWorkService {
         }
         return myWorkEntity;
     }
-
-    public List<MyWorkEntity> findByNameWork(String nameWork){
-        return myWorkRepository.findByNameWorkContaining(nameWork);
-    }
 }

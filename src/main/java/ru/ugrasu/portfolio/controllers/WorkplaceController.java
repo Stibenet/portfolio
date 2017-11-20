@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
+import ru.ugrasu.portfolio.exception.ResourceNotFoundException;
 import ru.ugrasu.portfolio.models.entities.KnowledgeEntity;
 import ru.ugrasu.portfolio.models.entities.WorkplaceEntity;
 import ru.ugrasu.portfolio.models.services.KnowledgeService;
@@ -25,6 +27,10 @@ public class WorkplaceController {
 
     @RequestMapping(value = "/findByNameWorkplace/{name}", produces = APPLICATION_JSON_UTF8_VALUE, method = GET)
     public List<WorkplaceEntity> findByNameWorkplace(@PathVariable("name") String name) {
-        return workplaceService.findByNameWorkplace(name);
+        try {
+            return workplaceService.findByNameWorkplace(name);
+        }catch (DbEntityNotFoundException e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
     }
 }

@@ -22,15 +22,6 @@ public class KnowledgeController {
     @Autowired
     private KnowledgeService knowledgeService;
 
-    @RequestMapping(value = "/findByNameKnow/{name}", produces = APPLICATION_JSON_UTF8_VALUE, method = GET)
-    public List<KnowledgeEntity> findByNameKnowledge(@PathVariable("name") String name) {
-        try {
-            return knowledgeService.findByNameKnowledge(name);
-        } catch (DbEntityNotFoundException e) {
-            throw new ResourceNotFoundException(e.getMessage());
-        }
-    }
-
     @RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
     public KnowledgeEntity findById(@PathVariable("id") Integer id){
         try {
@@ -40,23 +31,24 @@ public class KnowledgeController {
         }
     }
 
-    @RequestMapping(value = "/allKnowledge", method = RequestMethod.GET)
-    public List<KnowledgeEntity> getAllBikes(){
-        try {
-            return knowledgeService.getAllKnowledge();
-        }catch (DbEntityNotFoundException e){
-            throw new ResourceNotFoundException(e.getMessage());
-        }
-    }
-
     @RequestMapping(value = "/createKnowledge", method = RequestMethod.POST)
     public KnowledgeEntity createKnows(@RequestBody KnowledgeEntity knowledgeEntity){
-        return knowledgeService.createKnows(knowledgeEntity);
+        try {
+            return knowledgeService.createKnows(knowledgeEntity);
+        }catch (DbEntityNotFoundException e){
+            throw  new ResourceNotFoundException(e.getMessage());
+        }
+
     }
 
     @RequestMapping(value = "/updateKnowledge", method = RequestMethod.POST)
     public KnowledgeEntity updateKnows(@RequestBody KnowledgeEntity knowledgeEntity){
-        return knowledgeService.updateKnows(knowledgeEntity);
+        try {
+            return knowledgeService.updateKnows(knowledgeEntity);
+        }catch (DbEntityNotFoundException e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+
     }
 
     @RequestMapping(value = "/deleteKnowledge/{idKnows}", method = RequestMethod.GET)

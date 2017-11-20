@@ -34,10 +34,10 @@ public class AboutControllers {
 
     @RequestMapping(value = "/allAbout", method = RequestMethod.GET)
     public List<AboutMeEntity> getAll(){
-//        try {
+        try {
             return aboutService.getAll();
-//        }catch (DbEntityNotFoundException e){
-//            throw new ResourceNotFoundException(e.getMessage());
-//        }
+        }catch (DbEntityNotFoundException e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
     }
 }

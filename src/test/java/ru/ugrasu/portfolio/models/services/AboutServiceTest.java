@@ -1,4 +1,4 @@
-package ru.ugrasu.portfolio.controllers;
+package ru.ugrasu.portfolio.models.services;
 
 import com.google.common.collect.ImmutableList;
 import org.junit.Before;
@@ -21,34 +21,16 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Марсель on 17.11.2017.
  * JUnit test
- * Проверка правильности вызова метода getAll из AboutService
+ * Проверка правильности вызова метода findOne из AboutService
  */
 @RunWith(MockitoJUnitRunner.class)
 public class AboutServiceTest {
-//    @Mock
-//    private AboutService aboutService;
 
     @Mock
     private AboutRepository aboutRepository;
 
     @InjectMocks
-    private AboutService sut;
-
-//    @InjectMocks //создает экземпляр класса контроллер AboutControllers
-//            //просмотрит зависимости и инжектирует
-//    AboutControllers sut; //System under testing - Система под тестированием
-
-    @Test
-    public void getAllMustReturnAllDataAboutMeEntity() throws Exception {
-        //prepare
-        //Когда вызывается метод getAll() необходимо что то вернуть
-        //ImmutableList.of() - пустой список
-        when(aboutRepository.findAll()).thenReturn(ImmutableList.of());
-        //testing
-        List<AboutMeEntity> returned = sut.getAll();
-        //validate
-        verify(aboutRepository).findAll();
-    }
+    private AboutService aboutService;
 
     @Test
     public void findByIdMustReturnAboutMeEntity() throws DbEntityNotFoundException {
@@ -59,7 +41,9 @@ public class AboutServiceTest {
 
         when(aboutRepository.findOne(a.getIdAbout())).thenReturn(a);
         //testing
-        AboutMeEntity returnedAbout = sut.findById(2);
+        AboutMeEntity returnedAbout = null;
+            returnedAbout = aboutService.findById(2);
+
         //validate
         assertEquals(a.getIdAbout(), returnedAbout.getIdAbout());
     }

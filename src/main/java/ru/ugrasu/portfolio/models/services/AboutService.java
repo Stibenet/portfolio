@@ -20,12 +20,17 @@ public class AboutService {
         AboutMeEntity aboutMeEntity;
         aboutMeEntity = aboutRepository.findOne(id);
         if (aboutMeEntity == null){
-            throw new DbEntityNotFoundException("About with id = " + id + "not found");
+            throw new DbEntityNotFoundException("Id " + id + " field 'about' not found");
         }
         return aboutMeEntity;
     }
 
-    public List<AboutMeEntity> getAll(){
+    public List<AboutMeEntity> getAll() throws DbEntityNotFoundException {
+        Iterable<AboutMeEntity> aboutMeEntity;
+        aboutMeEntity = aboutRepository.findAll();
+        if (aboutMeEntity == null){
+            throw new DbEntityNotFoundException("Elements not found");
+        }
         return (List<AboutMeEntity>) aboutRepository.findAll();
     }
 }

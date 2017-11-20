@@ -8,9 +8,12 @@
                     success: function(data){
                         console.log(data);
                         $('#name1').html(
-							data.nameWork + "<br>" +
-							data.descriptionWork
+							data.nameWork// + "<br>" +
+							//data.descriptionWork
 						);
+                        $('#p').html(
+                            "New" + data.descriptionWork
+                        );
                     },
                     error: function(xhr,textStatus){
                         if(xhr.status=="500")
