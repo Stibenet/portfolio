@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
 import ru.ugrasu.portfolio.models.entities.AboutMeEntity;
 import ru.ugrasu.portfolio.models.entities.MyWorkEntity;
 import ru.ugrasu.portfolio.models.repositories.MyWorkRepository;
@@ -38,5 +39,10 @@ public class MyWorkServiceTest {
 
         //validate
         assertEquals(w.getIdWork(), returned.getIdWork());
+    }
+    @Test(expected = DbEntityNotFoundException.class)
+    public void findByIdMustReturnRunTimeException() throws DbEntityNotFoundException {
+        when(myWorkRepository.findOne(Integer.MIN_VALUE)).thenReturn(null);
+        myWorkService.findById(Integer.MIN_VALUE);
     }
 }

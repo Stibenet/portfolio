@@ -1,11 +1,16 @@
 package ru.ugrasu.portfolio.models.services;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
+import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
 import ru.ugrasu.portfolio.models.entities.KnowledgeEntity;
 import ru.ugrasu.portfolio.models.repositories.KnowledgeRepository;
 
@@ -14,6 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 /**
@@ -56,6 +63,13 @@ public class KnowledgeServiceTest {
                     knowledgeEntity.getIdKnowledge() > 0);
         }
     }
+    //TODO
+    @Test(expected = DbEntityNotFoundException.class)
+    public void createKnowsMustReturnRunTimeException() throws DbEntityNotFoundException {
+        KnowledgeEntity k = new KnowledgeEntity();
+        when(knowledgeRepository.save(k)).thenReturn(null);
+        knowledgeService.createKnows(k);
+    }
 
     @Test
     public void updateKnows() throws Exception {
@@ -73,6 +87,13 @@ public class KnowledgeServiceTest {
                     knowledgeEntity.getIdKnowledge() > 0);
         }
     }
+    //TODO
+    @Test(expected = DbEntityNotFoundException.class)
+    public void updateKnowsMustReturnRunTimeException() throws DbEntityNotFoundException {
+        KnowledgeEntity k = new KnowledgeEntity();
+        when(knowledgeRepository.save(k)).thenReturn(null);
+        knowledgeService.updateKnows(k);
+    }
 
     @Test
     public void deleteKnows() throws Exception {
@@ -81,15 +102,18 @@ public class KnowledgeServiceTest {
         k.setIdKnowledge(1);
         k.setNameKnowledge("test");
         k.setPeriodStudy("test2");
+        KnowledgeService mock;
 
-        KnowledgeEntity beforeDel = knowledgeRepository.findOne(1);
+        mock = Mockito.mock(KnowledgeService.class);
+        Mockito.doThrow(new IllegalArgumentException()).when(mock).deleteKnows(2);
+        try {
+            mock.deleteKnows(2);
+            //Assert.fail();
 
-        //testing
-        knowledgeRepository.delete(beforeDel);
-        KnowledgeEntity afterDel = knowledgeRepository.findOne(1);
-
-        //validate
-        assertNull(afterDel);
+        } catch (IllegalArgumentException e) {
+            System.out.println("er");
+            //e.getMessage();
+        }
     }
 
     @Test
@@ -106,5 +130,9 @@ public class KnowledgeServiceTest {
         //validate
         assertEquals(k.getIdKnowledge(), returned.getIdKnowledge());
     }
-
+    @Test(expected = DbEntityNotFoundException.class)
+    public void findByIdMustReturnRunTimeException() throws DbEntityNotFoundException {
+        when(knowledgeRepository.findOne(Integer.MIN_VALUE)).thenReturn(null);
+        knowledgeService.findById(Integer.MIN_VALUE);
+    }
 }

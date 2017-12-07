@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
 import ru.ugrasu.portfolio.models.entities.ExperienceWorkEntity;
 import ru.ugrasu.portfolio.models.entities.KnowledgeEntity;
 import ru.ugrasu.portfolio.models.repositories.ExperienceRepository;
@@ -41,5 +42,10 @@ public class ExperienceServiceTest {
 
         //validate
         assertEquals(e.getId(), returned.getId());
+    }
+    @Test(expected = DbEntityNotFoundException.class)
+    public void findByIdMustReturnRunTimeException() throws DbEntityNotFoundException {
+        when(experienceRepository.findOne(Integer.MIN_VALUE)).thenReturn(null);
+        experienceService.findById(Integer.MIN_VALUE);
     }
 }

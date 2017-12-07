@@ -41,11 +41,14 @@ public class AboutServiceTest {
 
         when(aboutRepository.findOne(a.getIdAbout())).thenReturn(a);
         //testing
-        AboutMeEntity returnedAbout = null;
-            returnedAbout = aboutService.findById(2);
+        AboutMeEntity returnedAbout = aboutService.findById(2);
 
         //validate
         assertEquals(a.getIdAbout(), returnedAbout.getIdAbout());
     }
-
+    @Test(expected = DbEntityNotFoundException.class)
+    public void findByIdMustReturnRunTimeException() throws DbEntityNotFoundException {
+        when(aboutRepository.findOne(Integer.MIN_VALUE)).thenReturn(null);
+        aboutService.findById(Integer.MIN_VALUE);
+    }
 }

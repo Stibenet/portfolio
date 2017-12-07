@@ -8,11 +8,10 @@
                     success: function(data){
                         console.log(data);
                         $('#name1').html(
-							data.nameWork// + "<br>" +
-							//data.descriptionWork
+							data.nameWork
 						);
-                        $('#p').html(
-                            "New" + data.descriptionWork
+                        $('#p1').html(
+                            data.descriptionWork
                         );
                     },
                     error: function(xhr,textStatus){
@@ -33,9 +32,11 @@
                     success: function(data){
                         console.log(data);
                         $('#name2').html(
-							data.nameWork + "<br>" +
-							data.descriptionWork
+							data.nameWork
 						);
+                        $('#p2').html(
+                            data.descriptionWork
+                        );
                     },
                     error: function(xhr,textStatus){
                         if(xhr.status=="500")
@@ -55,9 +56,11 @@
                     success: function(data){
                         console.log(data);
                         $('#name3').html(
-							data.nameWork + "<br>" +
-							data.descriptionWork
+							data.nameWork
 						);
+                        $('#p3').html(
+                            data.descriptionWork
+                        );
                     },
                     error: function(xhr,textStatus){
                         if(xhr.status=="500")
@@ -77,9 +80,11 @@
                     success: function(data){
                         console.log(data);
                         $('#name4').html(
-							data.nameWork + "<br>" +
-							data.descriptionWork
+							data.nameWork
 						);
+                        $('#p4').html(
+                            data.descriptionWork
+                        );
                     },
                     error: function(xhr,textStatus){
                         if(xhr.status=="500")
@@ -99,9 +104,11 @@
                     success: function(data){
                         console.log(data);
                         $('#name5').html(
-							data.nameWork + "<br>" +
-							data.descriptionWork
+							data.nameWork
 						);
+                        $('#p5').html(
+                            data.descriptionWork
+                        );
                     },
                     error: function(xhr,textStatus){
                         if(xhr.status=="500")
