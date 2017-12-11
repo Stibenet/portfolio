@@ -1,12 +1,15 @@
 package ru.ugrasu.portfolio.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ugrasu.portfolio.exception.BadRequestException;
 import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
 import ru.ugrasu.portfolio.exception.ResourceNotFoundException;
+import ru.ugrasu.portfolio.models.entities.KnowledgeEntity;
 import ru.ugrasu.portfolio.models.entities.MyWorkEntity;
 import ru.ugrasu.portfolio.models.services.MyWorkService;
 
@@ -31,6 +34,15 @@ public class MyWorkController {
             return myWorkService.findById(id);
         } catch (DbEntityNotFoundException e) {
             throw new ResourceNotFoundException(e.getMessage());
+        }
+    }
+    @RequestMapping(value = "/createWork",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, method = RequestMethod.POST)
+    public MyWorkEntity createWork(MyWorkEntity myWorkEntity){
+        try {
+            //System.out.println(myWorkEntity.getIdKnowledge() + knowledgeEntity.getNameKnowledge() + knowledgeEntity.getPeriodStudy());
+            return myWorkService.createWork(myWorkEntity);
+        }catch (DbEntityNotFoundException e){
+            throw  new ResourceNotFoundException(e.getMessage());
         }
     }
 }

@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Администратор</title>
+	<script type="text/javascript">
+	$( document ).ready(function() {
+        $('#bSave').click(function(){
+		var data = $("#fSave").serialize(); 
+            $.ajax({
+                url:"http://localhost:8080/work/createWork",
+                type:"POST",
+                data: data,
+                success: function(data){
+                    console.log(data);
+                    $('#nameWork').html("Название: "+data.nameWork);
+                    $('#descriptionWork').html("Название: "+data.descriptionWork);
+                    alert("OK");
+                },
+            error: function(xhr,textStatus){
+                    if(xhr.status=="500")
+                        $('#error1').html("<H1 style='color:red'>Ошибка на сервере</H1>");
+                    else $('#error1').html("<H1 style='color:red'>Ничего не найдено</H1>");
+                }
+            })
+        })
+    });
+	</script>
+</head>
+<body>
+<div class="block-on-center">
+		<h1>Доступ ограничен</h1>
+		<p>Введите данные администратора</p>
+<div class="aut">
+<form id="fSave" method="post">
+<table cellspacing="2" cellpadding="4" border="0">
+<tr>
+<td width="150">Логин:</td>
+<td width="150"><input type="text" name="login" size="20"></td>
+</tr>
+<tr>
+<td width="150">Пароль:</td>
+<td width="150"><input type="password" name="password" size="20"></td>
+</tr>
+<tr>
+<td width="300" colspan="2" valign="middle">
+<input type="submit" id="bSave" class=button value=" OK ">
+</td>
+</tr>
+</table>
+</form>
+</div>
+</div>
+</body>
+</html>

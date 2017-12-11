@@ -31,18 +31,18 @@ public class KnowledgeController {
         }
     }
 
-    @RequestMapping(value = "/createKnowledge", method = RequestMethod.POST)
-    public KnowledgeEntity createKnows(@RequestBody KnowledgeEntity knowledgeEntity){
+    @RequestMapping(value = "/createKnowledge",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, method = RequestMethod.POST)
+    public KnowledgeEntity createKnows(KnowledgeEntity knowledgeEntity){
         try {
+            System.out.println(knowledgeEntity.getIdKnowledge() + knowledgeEntity.getNameKnowledge() + knowledgeEntity.getPeriodStudy());
             return knowledgeService.createKnows(knowledgeEntity);
         }catch (DbEntityNotFoundException e){
             throw  new ResourceNotFoundException(e.getMessage());
         }
-
     }
 
-    @RequestMapping(value = "/updateKnowledge", method = RequestMethod.POST)
-    public KnowledgeEntity updateKnows(@RequestBody KnowledgeEntity knowledgeEntity){
+    @RequestMapping(value = "/updateKnowledge",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, method = RequestMethod.POST)
+    public KnowledgeEntity updateKnows(KnowledgeEntity knowledgeEntity){
         try {
             return knowledgeService.updateKnows(knowledgeEntity);
         }catch (DbEntityNotFoundException e){

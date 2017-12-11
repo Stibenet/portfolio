@@ -3,6 +3,7 @@ package ru.ugrasu.portfolio.models.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.ugrasu.portfolio.exception.DbEntityNotFoundException;
+import ru.ugrasu.portfolio.models.entities.KnowledgeEntity;
 import ru.ugrasu.portfolio.models.entities.MyWorkEntity;
 import ru.ugrasu.portfolio.models.repositories.MyWorkRepository;
 
@@ -24,5 +25,12 @@ public class MyWorkService {
             throw new DbEntityNotFoundException("Work with id = " + id + "not found");
         }
         return myWorkEntity;
+    }
+
+    public MyWorkEntity createWork(MyWorkEntity myWorkEntity) throws DbEntityNotFoundException {
+        if (myWorkEntity == null){
+            throw new DbEntityNotFoundException("Work is empty");
+        }
+        return myWorkRepository.save(myWorkEntity);
     }
 }
